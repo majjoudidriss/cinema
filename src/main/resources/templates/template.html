@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+<script>src="/webjars/jquery/3.0.0/jquery.min.js"</script>
+<script>src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"</script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="http://localhost:4200">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/Ville">Villes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/cinema">Cinemas</a>
+    </li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/salle">Salles</a>
+    </li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/categorie">Categories</a>
+    </li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/projection">Projections</a>
+    </li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:8083/film">Films</a>
+    </li>
+    </li>
+
+      <li class="nav-item ">
+      <a sec:.authorize="isAuthenticated()" class="nav-link" th:href="@{logout}">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+<section layout:fragment="pageContent">
+
+</section>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template.html">
+<body>
+<section layout:fragment="pageContent">
+<div class="m-5">
+<div class="container">
+<div class="card">
+<div class="card-header">Enregistrement avec succes</div>
+<div class="card-body">
+<div class="form-group">
+<label>ID:</label>
+<label th:text="${categorie.id}">ID:</label>
+</div>
+<div class="form-group">
+<label>Nom:</label>
+<label th:text="${categorie.name}"></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>

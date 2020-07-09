@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template.html">
+<body>
+<section layout:fragment="pageContent">
+<div class="m-5">
+<div class="container">
+<div class="card">
+<div class="card-header">Enregistrement avec succes</div>
+<div class="card-body">
+<div class="form-group">
+<label>ID:</label>
+<label th:text="${projection.id}">ID:</label>
+</div>
+<div class="form-group">
+<label>Date de Projection</label>
+<label th:text="${projection.dateProjection}"></label>
+</div>
+<div class="form-group">
+<label>Prix:</label>
+<label th:text="${projection.prix}"></label>
+</div>
+<div class="form-group">
+<label> Seance:</label>
+<label th:text="${projection.seance.heureDebut}">:</label>
+<div class="form-group">
+<label> Film:</label>
+<label th:text="${projection.Film.titre}">:</label>
+<div class="form-group">
+<label> Salle:</label>
+<label th:text="${projection.salle.name}+'::'+${projection.salle.cinema.name}+'::'+${projection.salle.cinema.ville.name}">:</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>

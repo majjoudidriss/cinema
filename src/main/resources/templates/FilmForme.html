@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template.html">
+<body>
+<section layout:fragment="pageContent">
+<div class="m-5">
+<div class="card">
+<div class="card-header" th:if="${film.id}==null">Ajouter Un Nouveau Film</div>
+<div class="card-header" th:if="${film.id}!=null">Modifier le Film</div>
+<div class="card-body">
+<form th:action="@{/addFilm}" method="post" enctype="multipart/form-data">
+<div class="form-group">
+<label class="control-label">ID:</label>
+<label class="control-label" th:text="${film.id}" >ID:</label>
+<input type="hidden" name="id" th:value="${film.id}" class="form-control">
+<span class="text-danger" th:errors=${film.id}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Titre:</label>
+<input type="text" name="titre" th:value="${film.titre}" class="form-control">
+<span class="text-danger" th:errors=${film.titre}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Realisateur:</label>
+<input type="text" name="realisateur" th:value="${film.realisateur}" class="form-control">
+<span class="text-danger" th:errors=${film.realisateur}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Description:</label>
+<input type="text" name="decription" th:value="${film.decription}" class="form-control">
+<span class="text-danger" th:errors=${film.decription}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Date de Production:</label>
+<input type="date" name="dateSortie" th:value="${film.dateSortie}" class="form-control">
+<span class="text-danger" th:errors=${film.dateSortie}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Photo:</label>
+<input type="file" name="file" class="form-control" th:value="film.photo">
+<span class="text-danger" th:errors=${film.photo}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Duree:</label>
+<input type="text" name="duree" th:value="${film.duree}" class="form-control">
+<span class="text-danger" th:errors=${film.duree}></span>
+</div>
+<div class="form-group">
+								<label class="control-label">Categorie:</label> 
+								<select name="categorie" class="form-control btn btn-info">
+									<option th:each="c:${categories}" th:text="${c.name}" class="form-control" th:value="${c.id}"
+									th:selected="${film.categorie.name}" th:if="${mode=='edit'}"></option>
+									<option th:each="c:${categories}" th:text="${c.name}" class="form-control" th:value="${c.id}"
+									 th:if="${mode!='edit'}"></option>					
+								</select>
+							</div>
+<button class="btn btn-success" type="submit">Save</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template.html">
+<body class=".bg-dark">
+	<section layout:fragment="pageContent">
+		<div class="m-5">
+			<div class="card" style="width: 1500px;"  >
+				<div class="card-header">listes des Film</div>
+				<div class="card-body">
+					<form method="get" th:action="@{film}">
+						<div class="form-group">
+							<label>Name</label> <input type="text" name="keyword"
+								th:value="${keyword}">
+							<button class="btn btn-success">chercher</button>
+						</div>
+					</form>
+					<table class="table">
+						<tr>
+							<th>Id</th>
+							<th>titre</th>
+							<th>realisateur</th>
+							<th>description</th>
+							<th>dateSortie</th>
+							<th>photo</th>
+							<th>duree</th>
+							<th>categorie</th>
+
+						</tr>
+						<tr th:each="p:${films}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.titre}"></td>
+							<td th:text="${p.realisateur}"></td>
+							<td th:text="${p.decription}"></td>
+							<td th:text="${p.dateSortie}"></td>
+							<td><img th:src="@{'/imageFilm/'+${p.id}}" width="100"
+								height="100" /></td>
+							<td th:text="${p.duree}"></td>
+							<td th:text="${p.categorie.name}"></td>
+
+
+							<td><a
+								onclick="return confirm('etes vous sur de supprimer')"
+								class="btn btn-danger"
+								th:href="@{deleteFilm(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}">Delete</a></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"> <a  class="btn btn-warning" th:href="@{editFilm(id=${p.id})}">Edit</a></td>	
+								
+						</tr>
+						<tr>
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><a th:href="@{FilmForme}" class="btn btn-info">Ajouter</a></td>
+						</tr>
+					</table>
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{film(page=${status.index},keyword=${keyword},size=${size})}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

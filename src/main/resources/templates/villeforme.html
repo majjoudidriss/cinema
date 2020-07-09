@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template.html">
+<body>
+<section layout:fragment="pageContent">
+<div class="m-5">
+
+<div class="card">
+<div class="card-header" th:if="${ville.id}==null">Ajouter Une Nouvelle Ville</div>
+<div class="card-header" th:if="${ville.id}!=null">Modifier la Ville</div>
+<div class="card-body">
+<form th:action="@{addVille}" method="post">
+<div class="form-group">
+<label class="control-label">ID:</label>
+<label class="control-label" th:text="${ville.id}" >ID:</label>
+<input type="hidden" name="id" th:value="${ville.id}" class="form-control">
+<span class="text-danger" th:errors=${ville.id}></span>
+</div>
+<div class="form-group">
+<label class="control-label">VilleName:</label>
+<input type="text" name="name" th:value="${ville.name}" class="form-control">
+<span class="text-danger" th:errors=${ville.name}></span>
+</div>
+<button class="btn btn-success" type="submit">Save</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>

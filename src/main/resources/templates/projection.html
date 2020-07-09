@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template.html">
+<body>
+<section layout:fragment="pageContent">
+<div class="m-5">
+<div class="card">
+<div class="card-header">listes des Projection</div>
+<div class="card-body">
+<form method="get" th:action="@{projection}">
+<div class="form-group">
+<label>Film Name</label>
+<input type="text" name="keyword" th:value="${keyword}">
+<button class="btn btn-success">chercher</button>
+</div>
+</form>
+<table class="table">
+<tr>
+<th>Id</th>
+<th>dateProjection</th>
+<th>prix</th>
+<th>Seance</th>
+<th>Film</th>
+<th>Salle</th>
+</tr>
+<tr th:each="p:${projections}">
+<td th:text="${p.id}"></td>
+<td th:text="${p.dateProjection}"></td>
+<td th:text="${p.prix}"></td>
+<td th:text="${p.seance.heureDebut}"></td>
+<td th:text="${p.film.titre}"></td>
+<td th:text="${p.salle.name}+'::'+${p.salle.cinema.name}+'::'+${p.salle.cinema.ville.name}"></td>
+
+<td > <a onclick="return confirm('etes vous sur de supprimer')" class="btn btn-danger" th:href="@{deleteProjection(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}">Delete</a></td>	
+<td sec:authorize="hasRole('ROLE_ADMIN')"> <a class="btn btn-warning" th:href="@{editProjection(id=${p.id})}">Edit</a></td>	
+</tr>
+<tr>
+<td></td><td></td><td></td><td></td><td></td><td></td><td><td><a th:href="@{ProjectionForme}" class="btn btn-info">Ajouter</a></td>
+
+</tr>
+</table>
+<ul class="nav nav-pills">
+<li  th:each="page,status:${pages}">
+<a th:class="${status.index==currentPage?'btn btn-primary':'btn'}" th:href="@{projection(page=${status.index},keyword=${keyword},size=${size})}" th:text="${status.index}"></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>
